@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
 
-namespace BankSystem
+
+namespace BankSystem.DataAccess
 {
-    public class DatabaseConnection
+    public class DBCustomer
     {
-        private string connectionString = @"Server=LAPTOP-44N5F7A0;Database=Banksystem;Integrated Security=True;";
+        private string connectionString = default!;
 
         public void InsertCustomer(int customerId, string firstname, string lastname, string phoneNumber, string email)
         {
@@ -32,25 +33,5 @@ namespace BankSystem
                 }
             }
         }
-
-        public void InsertAccount(int accountNumber, decimal saldo, int customerId) 
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                string query = "INSERT INTO Account (AccountNumber, Saldo, CustomerId)" +
-                                "VALUES (@AccountNumber, @Saldo, @CustomerId)";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@AccountNumber", accountNumber);
-                    command.Parameters.AddWithValue("@Saldo", saldo);
-                    command.Parameters.AddWithValue("@CustomerId", customerId);
-
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-
     }
 }

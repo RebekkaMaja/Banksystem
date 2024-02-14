@@ -25,6 +25,8 @@ namespace BankSystem
         {
             this.AccountNumber = accountNumber;
             this.Saldo = saldo;
+            Console.WriteLine("hej")
+              ;
         }
 
         
